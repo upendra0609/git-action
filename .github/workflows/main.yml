@@ -41,7 +41,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: [self-hosted, aws-ec2]  # Ensure this matches your self-hosted runner's labels
+    runs-on: [self-hosted]  # Ensure this matches your self-hosted runner's labels
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3  # Assuming you might need files from your repo
@@ -54,12 +54,12 @@ jobs:
         if: env.DOCKER_HUB_PRIVATE == 'true'  # Only run this step if your image is private
 
       - name: Pull Image from Docker Hub
-        run: docker pull upendra0609/demo-service:latest
+        run: docker pull upendra0609/demo-service
 
       - name: Check if old container exists
         id: old-container
         run: |
-          if docker inspect project-management-user_service-container; then
+          if docker inspect demo-service-container; then
             echo "OLD_CONTAINER_EXISTS=true" >> $GITHUB_ENV
           else
             echo "OLD_CONTAINER_EXISTS=false" >> $GITHUB_ENV
@@ -70,4 +70,4 @@ jobs:
         run: docker rm -f demo-service-container
 
       - name: Run Docker container
-        run: docker run -d -p 5001:5001 --name demo-service-container upendra0609/demo-service
+        run: docker run -d -p 8080:8080 --name demo-service-container upendra0609/demo-service
