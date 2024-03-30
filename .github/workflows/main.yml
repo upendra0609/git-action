@@ -70,4 +70,4 @@ jobs:
         run: docker rm -f demo-service-container
 
       - name: Run Docker container
-        run: docker run -d -p 8080:8080 --name demo-service-container upendra0609/demo-service
+        run: docker run -d -i -t -p 8080:8080 --name demo-service-container upendra0609/demo-service
