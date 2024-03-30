@@ -8,12 +8,12 @@ public class HelloController {
 
 	@GetMapping("/")
 	public String index() {
-		return "Hello World!";
+		return "Welcome to GIT HUB Action";
 	}
 
 	@GetMapping("/hello")
 	public String hello() {
-		return "Hello!";
+		return "Enjoy Git Hub Action";
 	}
 
 }
